@@ -7,13 +7,14 @@ A short introduction to using the pg module on nodejs.
 Sample database operations ran from a node application.
 Remember to change the Client information for each 'app.js' file to match your system's db variables:
 
+```
 const client = new Client({
     database: YOUR DATABASE,
     host: YOUR HOST,
     user: YOUR USER,
     // also password if you have it setup.
 });
-
+```
 ### Prerequisites
 
 What things you need to install the software and how to install them
