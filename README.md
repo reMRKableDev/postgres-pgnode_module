@@ -8,9 +8,9 @@ Sample database operations ran from a node application.
 Remember to change the Client information for each 'app.js' file to match your system's db variables:
 
 const client = new Client({
-    database: <YOUR DATABASE>,
-    host: <YOUR HOST>,
-    user: <YOUR OWNER/USER> 
+    database: ,
+    host: ,
+    user: ,
     // also password if you have it setup.
 });
 
