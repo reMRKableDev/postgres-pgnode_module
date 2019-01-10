@@ -44,3 +44,10 @@ client.query(`update hats set height = 550 where name = 'top hat'`, (error, resu
     client.end();
 });
 ----------------------------------------------------------------------------------------
+Delete alternative (using IF statement) - deletes from table 'hats' in the database:
+
+client.query(`delete from hats where id = 8`, (error, result) => {
+    if (error) error.stack;
+    console.log(`${result.command}: ${result.rowCount}`);
+    client.end();
+});
