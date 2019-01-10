@@ -12,8 +12,8 @@ const client = new Client({
 // Connect client (alternative-way is in alternatives.txt file).
 client.connect();
 
-// Write from DB (alternative-way is in alternatives.txt file).
-client.query(`insert into hats (name,material,height,brim,price) values('cowboy', 'straw', '4', true, 100)`, (error, result) => {
+// Update value in DB (alternative-way is in alternatives.txt file).
+client.query(`update hats set height = 550 where name = 'top hat'`, (error, result) => {
     console.log(error ? error.stack : `${result.command}: ${result.rowCount}`);
     client.end();
 });

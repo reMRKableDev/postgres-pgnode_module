@@ -36,3 +36,11 @@ client.query(`insert into hats (name, material, height, brim, price) values('cow
     client.end();
 });
 ----------------------------------------------------------------------------------------
+Update alternative (using IF statement) - updates to table 'hats' in the database:
+
+client.query(`update hats set height = 550 where name = 'top hat'`, (error, result) => {
+    if (error) error.stack;
+    console.log(`${result.command}: ${result.rowCount}`);
+    client.end();
+});
+----------------------------------------------------------------------------------------
