@@ -18,7 +18,7 @@ function work(queryString, queryParameters) {
     client.query(queryString, queryParameters, (err, result) => {
 
         console.log(err ? err.stack : result.rows);
-        // client.end();
+        client.end();
     });
 
 }
