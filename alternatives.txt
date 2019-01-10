@@ -1,0 +1,38 @@
+Pg-Client setup alternative - Passing the object values for the client via a String:
+
+const {
+    Client
+} = require('pg');
+
+const connectionString = 'postgres://malcolmkente@localhost/postgres';
+
+const client = new Client({
+    connectionString: connectionString
+});
+----------------------------------------------------------------------------------------
+Connection setup alternative - Creating a connection with a callback function that checks if an error occurs when connecting:
+
+client.connect((err) => {
+    if (err) {
+        console.error('connection error', err.stack)
+    } else {
+        console.log('connected')
+    }
+});
+----------------------------------------------------------------------------------------
+Read alternative (using IF statement) - reads from table 'hats' in the database:
+
+client.query(`select * from hats`, (error, result) => {
+    if (error) error.stack;
+    console.log(result.rows);
+    client.end();
+});
+----------------------------------------------------------------------------------------
+Write alternative (using IF statement) - writes to table 'hats' in the database:
+
+client.query(`insert into hats (name, material, height, brim, price) values('cowboy hat', 'straw', '4', true, 103)`, (error, result) => {
+    if (error) error.stack;
+    console.log(`${result.command}: ${result.rowCount}`);
+    client.end();
+});
+----------------------------------------------------------------------------------------
