@@ -1,19 +1,26 @@
-// Client setup (alternative-way is in alternatives.txt file).
-const {
-    Client
-} = require('pg');
+/* Read from the connection established in the config file under db folder */
+const pool = require("../../db/create-config.js");
 
-const client = new Client({
-    database: 'postgres',
-    host: 'localhost',
-    user: 'malcolmkente' // also password if you have it setup
-});
+/* 
+Both queries below achieve the same thing. 
+- The first one uses a Callback function. 
+- The second one uses Promises */
 
-// Connect client (alternative-way is in alternatives.txt file).
-client.connect();
+// Callback
+/* pool.query(
+  `insert into hats (name,material,height,brim) values('cowboy', 'straw', '4', true)`,
+  (error, results) => {
+    console.log(error ? error.stack : `${results.command}: ${results.rowCount}`);
+  }
+); */
 
-// Write to DB (alternative-way is in alternatives.txt file).
-client.query(`insert into hats (name,material,height,brim,price) values('cowboy', 'straw', '4', true, 100)`, (error, result) => {
-    console.log(error ? error.stack : `${result.command}: ${result.rowCount}`);
-    client.end();
-});
+// Promise
+pool
+  .query(
+    `insert into hats (name,material,height,brim) values('cowboy', 'straw', '4', true)`
+  )
+  .then(results => console.log(`${results.command}: ${results.rowCount}`))
+  .catch(error => console.error(error.stack));
+
+/* End pooling when query is done. */
+pool.end();

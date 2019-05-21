@@ -1,19 +1,22 @@
-// Client setup (alternative-way is in alternatives.txt file).
-const {
-    Client
-} = require('pg');
+/* eslint-disable no-console */
+/* Read from the connection established in the config file under db folder */
+const pool = require("../../db/create-config.js");
 
-const client = new Client({
-    database: 'postgres',
-    host: 'localhost',
-    user: 'malcolmkente' // also password if you have it setup.
+/*
+Both queries below achieve the same thing.
+- The first one uses a Callback function.
+- The second one uses Promises */
+
+// Callback
+/* pool.query(`select * from hats`, (error, result) => {
+  console.log(error ? error.stack : result.rows);
 });
+ */
 
-// Connect client (alternative-way is in alternatives.txt file).
-client.connect();
+// Promise
+pool
+  .query("select * from hats")
+  .then(results => console.log(results.rows))
+  .catch(error => console.log(error.stack));
 
-// Read from DB (alternative-way is in alternatives.txt file).
-client.query(`select * from hats`, (error, result) => {
-    console.log(error ? error.stack : result.rows) //
-    client.end();
-});
+pool.end();
