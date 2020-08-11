@@ -13,6 +13,6 @@
     "pg": "^8.0.0"
   },
   "devDependencies": {
-    "eslint": "7.5.0"
+    "eslint": "7.6.0"
   }
 }
